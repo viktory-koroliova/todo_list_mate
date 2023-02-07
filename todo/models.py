@@ -1,8 +1,12 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Tag(models.Model):
-    name = models.CharField
+    name = models.CharField(max_length=63)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Task(models.Model):
@@ -17,3 +21,6 @@ class Task(models.Model):
             "is_done",
             "-datetime"
         ]
+
+    def get_absolute_url(self):
+        return reverse("todo:task-list")
